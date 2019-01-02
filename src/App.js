@@ -1,26 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
+import Header from './components/Header/Header';
+import NavBar from './components/NavBar/NavBar';
+import MainContainer from './containers/MainContainer/MainContainer';
+import MessageContainer from './containers/MessageContainer/MessageContainer';
+import Profile from './containers/Profile/Profile';
+import { Container, Grid } from 'semantic-ui-react';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Container textAlign="center">
+        <BrowserRouter>
+          <div>
+            <Header />
+            <NavBar />
+            <Grid>
+              <div className="ui row">
+                <div className="sixteen wide column">
+                  <Route path="/" exact component={MainContainer} />
+                  <Route path="/profile" exact component={Profile} />
+                  <Route path="/messages" exact component={MessageContainer} />
+                </div>
+              </div>
+            </Grid>
+          </div>
+        </BrowserRouter>
+      </Container>
     );
   }
 }
